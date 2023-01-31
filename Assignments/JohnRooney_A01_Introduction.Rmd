@@ -1,0 +1,60 @@
+---
+title: "Assignment 1: Introduction"
+author: "John Rooney"
+output: pdf_document
+geometry: margin=2.54cm
+---
+
+## OVERVIEW
+
+This exercise accompanies the introductory material in Environmental Data Analytics. 
+
+## Directions
+1.  Rename this file `<FirstLast>_A01_Introduction.Rmd` (replacing `<FirstLast>` with your first and last name).
+2.  Change "Student Name" on line 3 (above) with your name.
+3.  Work through the steps, **creating code and output** that fulfill each instruction.
+4.  Be sure to **answer the questions** in this assignment document.
+5.  When you have completed the assignment, **Knit** the text and code into a single PDF file.
+6.  After Knitting, submit the completed exercise (PDF file) to the appropriate assigment section on Sakai.
+
+
+## 1) Finish setting up R Studio
+
+### Install TinyTex
+Now, run this code cell the same way. This will install "tinytex" -- a helper app that allows you to knit your markdown documents into professional quality PDFs.
+```{r install tiny tex, eval=FALSE, include=FALSE}
+#install tinytext
+tinytex::install_tinytex()
+```
+
+### Set your default knit directory
+This setting will help deal with relative paths later on...
+ - From the Tool menu, select `Global Options`
+ - Select the RMarkdown section
+ - In the "Evaluate chunks in directory", set the option to "Project"
+
+
+## 2) Discussion Questions
+Enter answers to the questions just below the >Answer: prompt.
+
+1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
+
+> Answer: All of my experience with data analytics, R, and Git come from taking ENV 710 last fall. I had never done any coding or data analytics prior to that. We didn't use Git like we are in this course, but we did pull some datasets from Github. I was a weak coder in ENV 710 and wanted to strengthen my data analytics and R skills and felt this class would be a great opportunity to do so. I am also taking Time Series Analysis with Luana this semester which I think will pair very nicely. 
+
+2. Are there any components of the course about which you feel confident?
+
+> Answer: I think the first few weeks will feel pretty comfortable given my prior experience.
+
+3. Are there any components of the course about which you feel apprehensive?
+
+> Answer: My reason for being here is that I didn't leave ENV 710 feeling confident in my R and data analytics skills, so I'm a little apprehensive in general! I especially struggled with visualization and making plots and graphs look how I wanted them to. 
+
+
+## 3) GitHub
+
+Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository and that you have updated your course README file, committed those changes, and pushed them to your GitHub account. 
+
+> Answer: https://github.com/jkrooney/EDA-Spring2023
+
+## 4) Knitting
+When you have completed this document, click the `knit` button.This should produce a PDF copy of your markdown document. Submit this PDF to Sakai. 
