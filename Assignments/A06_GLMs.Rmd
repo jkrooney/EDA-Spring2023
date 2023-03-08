@@ -1,6 +1,6 @@
 ---
 title: "Assignment 6: GLMs (Linear Regressios, ANOVA, & t-tests)"
-author: "Student Name"
+author: "John Rooney"
 date: "Spring 2023"
 output: pdf_document
 geometry: margin=2.54cm
