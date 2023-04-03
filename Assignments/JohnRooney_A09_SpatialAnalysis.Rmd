@@ -1,11 +1,13 @@
 ---
-title: "Assignment 9: Spatial Analysis in R"
+title: 'Assignment 9: Spatial Analysis in R'
 author: "John Rooney"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 geometry: margin=2.54cm
-editor_options: 
+editor_options:
   chunk_output_type: console
-  markdown: 
+  markdown:
     wrap: 72
 ---
 
