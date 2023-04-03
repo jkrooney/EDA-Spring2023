@@ -198,7 +198,7 @@ gage.data.complete.utm <- st_transform(gage.data.complete, crs = 32614)
 #21 Plot the data
 ggplot() +
   geom_sf(data = counties.sf.utm,fill='lavender', color="grey") + 
-  geom_sf(data = gage.data.complete.utm,fill='indianred',shape='O')+
+  geom_sf(data = gage.data.complete.utm, color='indianred')+
  labs(title="NWIS Gage Locations in Nebraska")+
   theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))
 
@@ -218,13 +218,22 @@ Now let's zoom into a particular county and examine the gages located there.
 
 ```{r}
 #22 Select the county
-
-
+Douglas.county.sf <- counties.sf.utm %>%
+  filter(NAME == "Douglas")
+Douglas.county.sf
 #23 Select gages within the selected county
+Douglas.gages <- gage.data.complete.utm[Douglas.county.sf,]
 
 
 #24 Plot
-
-
-
+mapView(counties.sf.utm, col.regions="darkseagreen", color="grey") +
+  mapView(Douglas.county.sf, col.regions="steelblue2") +
+  mapView(Douglas.gages, col.regions ="indianred")
+#just wanted to practice and see if I could do both ways
+ggplot() +
+  geom_sf(data = counties.sf.utm,fill="darkseagreen", color="black") + 
+  geom_sf(data = Douglas.county.sf, color="steelblue3")+
+  geom_sf(data = Douglas.gages, color = "indianred") +
+ labs(title="NWIS Gage Locations in Douglas County, Nebraska")+
+  theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))
 ```
