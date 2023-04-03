@@ -77,7 +77,8 @@ Next we'll read in some USGS/NWIS gage location data added to the `Data/Raw` fol
 
 ```{r Read in USGS Gage Locations}
 #7. Read in gage locations csv as a dataframe
-gage.location <- read.csv("./Data/Raw/NWIS_SiteInfo_NE_RAW.csv")
+gage.location <- read.csv("./Data/Raw/NWIS_SiteInfo_NE_RAW.csv", 
+                          colClasses = c("site_no" = 'factor'))
 
 #8. Reveal the names of the columns
 colnames(gage.location)
@@ -144,19 +145,23 @@ Lastly, we want to attach some gage height data to our site locations. I've cons
 
 ```{r}
 #14. Read the site flow data into a data frame
-gage.height.data <- read.csv("./Data/Raw/NWIS_SiteFlowData_NE_RAW.csv")
+gage.height.data <- read.csv("./Data/Raw/NWIS_SiteFlowData_NE_RAW.csv", 
+                             colClasses = c("site_no" = 'factor')) %>%
+  group_by(site_no, station_nm) %>%
+  summarize(mean_gage_ht = mean(gage_ht, na.rm=T))
 
 #15. Show the column names
 colnames(gage.height.data)
 
 #16. Join the flow data to our NWIS gage location spatial dataframe
-gage.data.complete <- 
+gage.data.complete <- gage.location.sf %>% 
+  left_join(gage.height.data, by = c("site_no" = "site_no") )
 
 #17. Show the column names of the joined dataset
-
+colnames(gage.data.complete)
 
 #18. Show the dimensions of this joined dataset
-
+dim(gage.data.complete)
 
 ```
 
@@ -168,7 +173,8 @@ Now we can examine where the flooding appears most acute by visualizing gage hei
 
 ```{r}
 #Map the points, sized by gage height
-
+mapView(counties.sf, col.regions="ivory")+
+  mapView(gage.data.complete, zcol= "mean_gage_ht")
 
 ```
 
@@ -186,10 +192,15 @@ Up next we will do some spatial analysis with our data. To prepare for this, we 
 
 ```{r}
 #20 Transform the counties and gage location datasets to UTM Zone 14
-
+counties.sf.utm <- st_transform(counties.sf, crs = 32614)
+gage.data.complete.utm <- st_transform(gage.data.complete, crs = 32614)
 
 #21 Plot the data
-
+ggplot() +
+  geom_sf(data = counties.sf.utm,fill='lavender', color="grey") + 
+  geom_sf(data = gage.data.complete.utm,fill='indianred',shape='O')+
+ labs(title="NWIS Gage Locations in Nebraska")+
+  theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))
 
 ```
 
