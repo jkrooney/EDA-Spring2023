@@ -342,7 +342,7 @@ In the exercise below, we'll subset one of the HUCs (Upper Neuse), and explore c
 
 ```{r spatial.overlap.exercises}
 #Clip the HUC2 data set by the NC State boundary dataset
-neuse_sf <- huc2_utm %>% 
+neuse_sf <- huc8_sf_utm %>% 
   filter(DWQ_Basin == "Neuse")
 
 #Start building a map object
