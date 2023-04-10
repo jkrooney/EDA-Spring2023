@@ -30,6 +30,7 @@ This exercise accompanies the lessons in Environmental Data Analytics on data sc
 #1
 library(tidyverse)
 library(rvest)
+library(lubridate)
 
 getwd()
 ```
@@ -87,7 +88,7 @@ max.withdrawals.mgd
 ```
 
 
-4. Convert your scraped data into a dataframe. This dataframe should have a column for each of the 4 variables scraped and a row for the month corresponding to the withdrawal data. Also add a Date column that includes your month and year in data format. (Feel free to add a Year column too, if you wish.)
+4. Convert your scraped data into a dataframe. This dataframe should have a column for each of the 4 variables scraped and a row for the month corresponding to the withdrawal data. Also add a Date column that includes your month and year in date format. (Feel free to add a Year column too, if you wish.)
 
 >TIP: Use `rep()` to repeat a value when creating a dataframe.
 
@@ -97,8 +98,23 @@ max.withdrawals.mgd
 
 ```{r create.a.dataframe.from.scraped.data}
 #4
+#create month vector
+month <- LWSP_website %>% 
+  html_nodes('.fancy-table:nth-child(31) tr+ tr th') %>% 
+  html_text()
+month
 
+#create data frame
+df_withdrawals <- data.frame("Month" = month,
+                             "Year" = rep(2022,12),
+                             "Max_Withdrawals_mgd" = as.numeric(max.withdrawals.mgd), 
+                             "Ownership" = ownership,
+                             "PWSID" = PWSID,
+                             "System Name" = water.system.name)
 
+#add date column
+df_withdrawals <- df_withdrawals %>% 
+  mutate(Date = my(paste(Month,"-",Year)))
 
 #5
 
